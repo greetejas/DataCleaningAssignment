@@ -79,6 +79,10 @@ setwd("directoryOfInputData")
 ```{r}
 source("run_analysis.R") 
 ```
+
+### Note:
+Refer the comments in the script for the description of analysis steps for additional info.
+
 # Outputs: 
 ### Tidy DataSet of Averages
 A dataframe of 180 rows and 35 columns will be generated as output. The structure/explanations of these can be found in the "CodeBook.md". The tidy dataset represents the average values of each measurements computed for each activity in each subjects.
