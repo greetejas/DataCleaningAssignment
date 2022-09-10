@@ -58,16 +58,6 @@ Notes:
 
 For more information about this dataset contact: activityrecognition@smartlab.ws
 
-License:
-
-Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
-
-[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
-
-Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
-
 
 # Analysis:
 1. Set the directory of input files 
@@ -75,10 +65,26 @@ Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012
 ```{r}
 setwd("directoryOfInputData") 
 ```
-2. Run the script
+2. Ensure reshape2 and dplyr libraries are installed properly.
+3. Run the script
 ```{r}
 source("run_analysis.R") 
 ```
+
+The script performs following actions:
+* READ train set files: {X,Y,Subject}_train.txt
+* READ test set files: {X,Y,Subject}_test.txt
+* READ features.txt as they for the headers for x_t*.txt files
+* Concatenate X files from test and train sets (using rbind) and rename the headers using the features 
+* Select only mean and std dev (sd) based columns from the combined X dataset
+* read activity labels to be used on y_t*.txt files
+* Concatenate Y_t*.txt files using rbind function and merge with activity file to get labels using dplyr::inner_join function. 
+* Select only the activity column as the final Y dataset
+* Concatenate subject files using rbind function
+* Finally, the merged output file is obtained by combining the concatenated dataframes of subject, y, and x in order using cbind function
+* Update column names to suitable to tidy data
+* Compute average each variable per activity per subject using dplyr::group_by and dplyr::summarise + across + mean functions
+* Save the tidy dataset and the script
 
 ### Note:
 Refer the comments in the script for the description of analysis steps for additional info.
