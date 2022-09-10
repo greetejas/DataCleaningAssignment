@@ -79,4 +79,4 @@ mean_df <- combined_dataSet %>% group_by(SubjectID, activity) %>% summarise(acro
 #### Save final output
 write.table(mean_df, file = "tidy_Dataset_of_averages.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
- summary(mean_df)
+ # summary(mean_df)
